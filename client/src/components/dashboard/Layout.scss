@@ -19,3 +19,12 @@
   margin-left: 0px;
   transition: margin-left 0.25s ease 0s;
 }
+
+.margin {
+  margin-left: 2rem;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+}

@@ -36,7 +36,7 @@ class Layout extends Component {
       dashboardContent = (
         <>
           <SideNav projects={projects} />
-          <div className="right">
+          <div className="right no-side">
             <TopNav />
             <Switch>
               <Route
@@ -61,7 +61,7 @@ class Layout extends Component {
       dashboardContent = (
         <>
           <SideNav />
-          <div className="right">
+          <div className="right no-side">
             <TopNav />
             <Switch>
               <Route

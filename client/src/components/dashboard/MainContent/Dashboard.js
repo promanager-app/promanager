@@ -10,6 +10,7 @@ class Dashboard extends Component {
   state = {
     modal: false,
     edit: false,
+    overview: false,
     name: "",
     members: [],
     id: "",
@@ -17,7 +18,7 @@ class Dashboard extends Component {
   };
 
   toggleModal = e => {
-    this.setState({ modal: !this.state.modal, edit: false });
+    this.setState({ modal: !this.state.modal, edit: false, overview: false });
   };
 
   toggleEditModal = (name, members, id, owner, e) => {
@@ -26,6 +27,21 @@ class Dashboard extends Component {
     this.setState({
       modal: !this.state.modal,
       edit: !this.state.edit,
+      overview: this.state.overview,
+      name: name,
+      members: members,
+      id: id,
+      owner: owner
+    });
+  };
+
+  toggleOverviewModal = (name, members, id, owner, e) => {
+    e.stopPropagation();
+
+    this.setState({
+      modal: !this.state.modal,
+      edit: this.state.edit,
+      overview: !this.state.overview,
       name: name,
       members: members,
       id: id,
@@ -47,7 +63,7 @@ class Dashboard extends Component {
         <div className="project-name">{project.name}</div>
         <div
           className="project-info-button"
-          onClick={this.toggleEditModal.bind(
+          onClick={this.toggleOverviewModal.bind(
             this,
             project.name,
             project.teamMembers,
@@ -55,7 +71,7 @@ class Dashboard extends Component {
             project.owner
           )}
         >
-          Edit project
+          Overview
         </div>
         <div className="project-info-button">Go to project</div>
       </div>
@@ -65,14 +81,18 @@ class Dashboard extends Component {
       // At least one project
       content = (
         <>
-          <button className="main-btn" onClick={this.toggleModal}>
-            Create another project
-          </button>
+          <div className="header-container">
+            <h1 className="header">Your Projects</h1>
+            <button style={{marginRight: "2rem"}} className="main-btn" onClick={this.toggleModal}> 
+              Create another project
+            </button>
+          </div>
           <div className="modal-wrapper">
             <Modal
               onClose={this.toggleModal}
               modal={this.state.modal}
               edit={this.state.edit}
+              overview={this.state.overview}
               name={this.state.name}
               members={this.state.members}
               id={this.state.id}
@@ -88,7 +108,7 @@ class Dashboard extends Component {
         <>
           <div className="projects">
             <div className="no-projects">
-              <h1 className="header">You have no projects</h1>
+              {/* <h1 className="header">You have no projects</h1> */}
               <button className="main-btn" onClick={this.toggleModal}>
                 Create your first project
               </button>
@@ -103,7 +123,6 @@ class Dashboard extends Component {
 
     return (
       <div className="main-content">
-        <h1 className="header">Your Projects</h1>
         {content}
       </div>
     );

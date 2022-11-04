@@ -25,7 +25,6 @@ class Project extends Component {
     taskName: "",
     assignee: "",
     taskId: "",
-    dateDue: ""
   };
 
   toggleModal = e => {
@@ -37,15 +36,45 @@ class Project extends Component {
     });
   };
 
-  toggleEditModal = (name, members, id, owner, e) => {
-    this.setState({
-      modal: !this.state.modal,
-      edit: !this.state.edit,
-      name: name,
-      members: members,
-      id: id,
-      owner: owner
-    });
+  toggleEditModal = (name, members, id, owner, type, e) => {
+
+    if (!this.state.modal && type === 'edit') {
+      document.querySelector('.tasks-container').style.display = 'none'
+
+      document.querySelector('.edit').classList.replace('add-btn', 'center-btn')
+      document.querySelector('.task').classList.replace('center-btn', 'add-btn')
+      document.querySelector('.discuss').classList.replace('center-btn', 'add-btn')
+
+      this.setState({
+        modal: !this.state.modal,
+        edit: !this.state.edit,
+        name: name,
+        members: members,
+        id: id,
+        owner: owner
+      });
+    }
+
+    else if (this.state.modal && type === 'task') {
+      document.querySelector('.tasks-container').style.display = 'block'
+
+      document.querySelector('.edit').classList.replace('center-btn', 'add-btn')
+      document.querySelector('.task').classList.replace('add-btn', 'center-btn')
+      document.querySelector('.discuss').classList.replace('center-btn', 'add-btn')
+
+      this.setState({
+        modal: !this.state.modal,
+        edit: !this.state.edit,
+        name: name,
+        members: members,
+        id: id,
+        owner: owner
+      });
+    }
+
+
+
+
   };
 
   toggleTaskModal = e => {
@@ -165,31 +194,59 @@ class Project extends Component {
       }
 
       return (
-        <div className="main-content">
-          <h1 style={{marginTop: '20vh'}} className="project-header">{project.name}</h1>
+        <div className="main-content container">
 
-          <div style={{display: 'flex', marginTop: '20vh', marginBottom: '40vh'}}>
-            <button
-              onClick={this.toggleEditModal.bind(
-                this,
-                project.name,
-                project.teamMembers,
-                project._id,
-                project.owner
-              )}
-              className="main-btn center-btn"
-            >
-              Edit Project
-          </button>
+          {/* Navigation */}
+          <div className="sub-container">
 
-            <button className="main-btn center-btn">Task Management</button>
+            <h1 style={{margin: '0', padding: '1rem'}} className="project-header">{project.name}</h1>
 
-            <button className="main-btn center-btn" onClick={routeChange}>Start Discussion</button>
+            <div style={{display: 'flex', margin: '0'}}>
+              
+              <button
+                onClick={this.toggleEditModal.bind(
+                  this,
+                  project.name,
+                  project.teamMembers,
+                  project._id,
+                  project.owner,
+                  'edit'
+                )} className="main-btn add-btn edit">Edit Project</button>
 
-            <button className="main-btn center-btn">Mind Mapping Tool</button>
+              <button className="main-btn center-btn task" onClick={this.toggleEditModal.bind(
+                  this,
+                  project.name,
+                  project.teamMembers,
+                  project._id,
+                  project.owner,
+                  'task'
+                )}>Task Management</button>
+
+              <button className="main-btn add-btn discuss" onClick={routeChange}>Start Discussion</button>
+              
+            </div>
+
           </div>
 
-          <div className="modal-wrapper">
+          {/* Task Management */}
+          <div className="tasks-container">
+            <div className="projects-first-row">
+              <button
+                className="main-btn add-btn"
+                onClick={this.toggleTaskModal}
+                style={{marginLeft: '1rem'}}
+              >
+                Add task
+              </button>
+              <div className="projects-column-headers">
+                <p>Assignee</p>
+                <p>Due</p>
+              </div>
+            </div>
+            <div className="project-tasks">{tasksList}</div>
+          </div>
+
+          <div className="modal-container">
             <Modal
               onClose={this.toggleModal}
               modal={this.state.modal}
@@ -206,21 +263,7 @@ class Project extends Component {
               taskId={this.state.taskId}
             />
           </div>
-          <div className="tasks-container">
-            <div className="projects-first-row">
-              <button
-                className="main-btn add-btn"
-                onClick={this.toggleTaskModal}
-              >
-                Add task
-              </button>
-              <div className="projects-column-headers">
-                <p>Assignee</p>
-                <p>Due</p>
-              </div>
-            </div>
-            <div className="project-tasks">{tasksList}</div>
-          </div>
+
         </div>
       );
     }

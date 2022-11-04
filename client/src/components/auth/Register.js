@@ -61,7 +61,7 @@ class Register extends Component {
             
             <div className="one-row">
               <i className="las la-chalkboard"></i>
-              <div className="logo-text">collaborate.team</div>
+              <div className="logo-text">Promanager</div>
             </div>
 
             <div className="two-row">
@@ -87,11 +87,11 @@ class Register extends Component {
             </div>
 
             <div className="row-two">
-              Join and create your team <br /> over 27 teams around the globe
+              Join and create your project <br /> more than 31 projects registered
             </div>
 
             <div className="row-three">
-              Create multiple projects and invite all your team members. Assign tasks, create deadlines, organize meetings and lead your team.
+              Create & manage projects and invite all your team members.  Assign tasks, create deadlines, and communicate with your team
             </div>
 
             {/* input fields */}
@@ -108,7 +108,7 @@ class Register extends Component {
                   type="text"
                   className="auth-input"
                   autoComplete="off"
-                  placeholder="Username"
+                  placeholder="Name"
                 />
                 <div className="auth-error">{errors.name}</div>
               </label>

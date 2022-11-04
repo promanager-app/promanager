@@ -56,7 +56,7 @@
 
 .form-input {
   background-color: $lighterGray;
-  border: 1px solid $lighterGray;
+  border: 1px solid #cdcdcd;
   border-radius: 4px;
   height: 40px;
   width: 100%;
@@ -107,30 +107,31 @@
 }
 
 .members-edit {
-  margin-top: 1rem;
-  overflow: scroll;
+  overflow-y: scroll;
   border-bottom: 1px solid $gray;
-  height: 130px;
+  height: 220px;
 }
 
 .add-members {
   background-color: $white;
   color: $primaryBlue;
+  margin: 0rem 3rem 1rem 3rem;
 
   &:hover {
     color: $white;
   }
 }
 
-.create-project,
-.update-project,
-.delete-project {
+.create-project {
   position: fixed;
   bottom: 1.25rem;
 }
 
 .delete-project {
-  margin-left: 335px;
+  margin: 1rem 1rem 0rem 3rem;
+}
+
+.delete-project {
   background-color: $red;
   border: 1px solid $red;
 
@@ -152,5 +153,15 @@
   &:hover {
     cursor: pointer;
     color: $red;
+  }
+}
+
+.new-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .header {
+    margin: 0;
   }
 }

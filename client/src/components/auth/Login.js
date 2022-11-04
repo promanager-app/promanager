@@ -73,12 +73,11 @@ class Login extends Component {
             
             <div className="one-row">
               <i className="las la-chalkboard"></i>
-              <div className="logo-text">collaborate.team</div>
+              <div className="logo-text">Promanager</div>
             </div>
 
             <div className="two-row">
-              <div className="hero-text">Create Teams, Project
-              Mind Maps & Organize Meetings</div>
+              <div className="hero-text">Create Projects, Assign Tasks & Communicate With Your Team</div>
             </div>
 
             <div className="three-row">
@@ -99,11 +98,11 @@ class Login extends Component {
             </div>
 
             <div className="row-two">
-              Join and create your team <br /> over 27 teams around the globe
+              Join and create your project <br /> more than 31 projects registered
             </div>
 
             <div className="row-three">
-              Create multiple projects and invite all your team members. Assign tasks, create deadlines, organize meetings and lead your team.
+              Create & manage projects and invite all your team members.  Assign tasks, create deadlines, and communicate with your team
             </div>
 
             {/* input fields */}

@@ -4,7 +4,7 @@
   flex: 1 1 auto;
   margin-left: 2rem;
   background-color: $white;
-  margin-top: 70px;
+  margin-top: 100px;
 }
 
 .header {
@@ -52,4 +52,32 @@
 
 .split {
   display: flex;
+}
+
+.container {
+  margin-top: 8rem !important;
+  width: 91rem;
+  height: 38rem;
+  background-color: #fafafa;
+  margin: auto;
+  border-radius: 3px;
+  border: 1px solid #bebebe;
+}
+
+.container-alt {
+  margin-top: 8rem !important;
+  width: 78rem;
+  height: 38rem;
+  background-color: #fafafa;
+  margin: auto;
+  border-radius: 3px;
+  border: 1px solid #bebebe;
+  margin-left: 2rem;
+}
+
+.sub-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem 1rem 2rem;
+  background: #fff
 }

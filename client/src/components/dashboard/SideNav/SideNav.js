@@ -16,6 +16,9 @@ class SideNav extends Component {
     let sideNav = document.querySelector(".side");
     sideNav.classList.add("invisibile");
 
+    let brandHeader = document.querySelector(".brand-header");
+    brandHeader.classList.add("margin");
+
     let hamburger = document.querySelector(".hamburger-top-menu");
     hamburger.classList.add("hamburger-visible");
 
@@ -24,6 +27,12 @@ class SideNav extends Component {
 
     let rightSideRight = document.querySelector(".right-top");
     rightSideRight.classList.add("right-top-visibile");
+
+    let mainContainer = document.querySelector(".container-alt");
+    if (mainContainer) {
+      mainContainer.classList.remove("container-alt");
+      mainContainer.classList.add("container");
+    }
   };
 
   render() {
@@ -35,8 +44,27 @@ class SideNav extends Component {
       </li>
     ));
 
+    let content;
+
+    if (window.location.pathname !== "/dashboard") {
+      content = (
+        <>
+          <ul className="bottom">
+            <li>
+              <h4 className="side-projects-header">Projects</h4>
+            </li>
+            <div className="project-listings">{projectData}</div>
+          </ul>
+        </>
+      )
+    } else {
+      content = (
+        <></>
+      )
+    }
+
     return (
-      <nav className="side">
+      <nav className="side invisibile">
         <ul className="top">
           <li>
             <i
@@ -64,12 +92,9 @@ class SideNav extends Component {
             </li>
           </div>
         </ul>
-        <ul className="bottom">
-          <li>
-            <h4 className="side-projects-header">Projects</h4>
-          </li>
-          <div className="project-listings">{projectData}</div>
-        </ul>
+        
+        {content}
+
       </nav>
     );
   }

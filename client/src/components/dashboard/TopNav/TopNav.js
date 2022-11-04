@@ -40,6 +40,9 @@ class TopNav extends Component {
     let sideNav = document.querySelector(".side");
     sideNav.classList.remove("invisibile");
 
+    let brandHeader = document.querySelector(".brand-header");
+    brandHeader.classList.remove("margin");
+
     let hamburger = document.querySelector(".hamburger-top-menu");
     hamburger.classList.remove("hamburger-visible");
 
@@ -48,6 +51,13 @@ class TopNav extends Component {
 
     let rightSideRight = document.querySelector(".right-top");
     rightSideRight.classList.remove("right-top-visibile");
+
+    let mainContainer = document.querySelector(".container");
+    if (mainContainer) {
+      mainContainer.classList.remove("container");
+      mainContainer.classList.add("container-alt");
+    }
+
   };
 
   render() {
@@ -58,17 +68,18 @@ class TopNav extends Component {
         <div className="left-top">
           <i
             onClick={this.toggleMenu}
-            className="material-icons hamburger-top-menu"
+            className="material-icons hamburger-top-menu hamburger-visible"
           >
             menu
           </i>
           <Link to="/dashboard">
-            <h1 className="brand-header">
-              Team<span className="brand-header-sub">s</span>
+            <h1 className="brand-header margin">
+              Promanager
+              {/* <span className="brand-header-sub">s</span> */}
             </h1>
           </Link>
         </div>
-        <ul className="right-top">
+        <ul className="right-top right-top-visibile">
           <li>
             <div className="email">
               <p>Signed in as {email}</p>

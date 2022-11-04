@@ -95,8 +95,8 @@ router.post(
     var transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: 'collaborate.teams@gmail.com',
-        pass: 'collabteams1299'
+        user: 'app.promanager@gmail.com',
+        pass: 'ProManager@16'
       }
     });
 

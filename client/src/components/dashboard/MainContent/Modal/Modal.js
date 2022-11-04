@@ -28,7 +28,7 @@ class Modal extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.edit) {
+    if (nextProps.edit || nextProps.overview) {
       this.setState({
         projectName: nextProps.name,
         members: nextProps.members
@@ -267,7 +267,7 @@ class Modal extends Component {
       ));
 
       return (
-        <form onSubmit={this.createTask} className="modal">
+        <form onSubmit={this.createTask} className="modal" style={{position: 'absolute', top: '55%', left: '50%', transform: 'translate(-50%, -50%)'}}>
           <span className="close-modal" onClick={this.onClose}>
             &times;
           </span>
@@ -283,6 +283,7 @@ class Modal extends Component {
                 type="text"
                 placeholder={"What is the task?"}
                 className="form-input"
+                autoComplete="off"
               />
             </label>
           </div>
@@ -415,6 +416,7 @@ class Modal extends Component {
                 type="text"
                 placeholder={"What is the task?"}
                 className="form-input"
+                autoComplete="off"
               />
             </label>
           </div>
@@ -501,18 +503,90 @@ class Modal extends Component {
       );
     }
 
+    //Overview project modal
+    else if (this.props.overview) {
+      return (
+        <div className="modal">
+
+          <div className="new-modal-header">
+            <h1 className="header">Overview</h1>
+            <span className="close-modal" onClick={this.onClose}>&times;</span>
+          </div>
+
+
+          <p className="created-by">
+            Created by {this.props.owner.name} ({this.props.owner.email})
+          </p>
+          <div className="form-group">
+            <label>
+              <div className="form-label">Project Name</div>
+              <input
+                onChange={this.onChange}
+                value={this.state.projectName}
+                id="projectName"
+                type="text"
+                placeholder={this.props.name}
+                className="form-input"
+                disabled
+                autoComplete="off"
+              />
+            </label>
+          </div>
+          <div className="form-label">Team members</div>
+          <div className="members-edit">
+            {members.map((val, id) => {
+              let memberId = `member-${id}`,
+                emailId = `email-${id}`;
+              return (
+                <div className="split" key={id}>
+                  <label className="form-label" htmlFor={memberId}>
+                    Name
+                    <input
+                      type="text"
+                      name="name"
+                      data-id={id}
+                      id={memberId}
+                      value={members[id].name}
+                      className="form-input"
+                      onChange={this.onChange}
+                      disabled
+                      autoComplete="off"
+                    />
+                  </label>
+                  <label className="form-label split-email" htmlFor={emailId}>
+                    Email
+                    <input
+                      type="text"
+                      name="email"
+                      data-id={id}
+                      id={emailId}
+                      value={members[id].email}
+                      className="form-input"
+                      onChange={this.onChange}
+                      disabled
+                      autoComplete="off"
+                    />
+                  </label>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      );
+    }
+
     // Edit project modal
     else if (this.props.edit) {
       return (
-        <div className="modal">
-          <span className="close-modal" onClick={this.onClose}>
+        <div className="edit-project-modal">
+          {/* <span className="close-modal" onClick={this.onClose}>
             &times;
           </span>
           <h1 className="header">Edit Project Info</h1>
           <p className="created-by">
             Created by {this.props.owner.name} ({this.props.owner.email})
-          </p>
-          <div className="form-group">
+          </p> */}
+          <div className="form-group" style={{width: '100%', padding: '1rem 3rem 1rem 3rem', fontSize: '14px', color: '#616161', fontFamily: "Oxygen Mono"}}>
             <label>
               <div className="form-label">Project Name (required)</div>
               <input
@@ -522,14 +596,15 @@ class Modal extends Component {
                 type="text"
                 placeholder={"My Awesome Project"}
                 className="form-input"
+                autoComplete="off"
               />
             </label>
           </div>
-          <div className="form-label">Add team members (optional)</div>
+          <div className="form-label" style={{padding: '0rem 3rem'}}>Add team members (optional)</div>
           <button className="main-btn add-members" onClick={this.addMember}>
             Add another member
           </button>
-          <div className="members-edit">
+          <div className="members-edit" style={{padding: '1rem 3rem 1rem 3rem'}}>
             {members.map((val, id) => {
               let memberId = `member-${id}`,
                 emailId = `email-${id}`;
@@ -545,6 +620,7 @@ class Modal extends Component {
                       value={members[id].name}
                       className="form-input"
                       onChange={this.onChange}
+                      autoComplete="off"
                     />
                   </label>
                   <label className="form-label split-email" htmlFor={emailId}>
@@ -557,6 +633,7 @@ class Modal extends Component {
                       value={members[id].email}
                       className="form-input"
                       onChange={this.onChange}
+                      autoComplete="off"
                     />
                   </label>
                   <span
@@ -573,6 +650,8 @@ class Modal extends Component {
             <button
               className="main-btn update-project"
               onClick={this.updateProject.bind(this, this.props.id)}
+              style={{
+    marginLeft: '3rem'}}
             >
               Update Project
             </button>
@@ -593,13 +672,16 @@ class Modal extends Component {
     else
       return (
         <div className="modal">
+
+        <div className="new-modal-header">
+        <h1 className="header">Create a project</h1>
           <span className="close-modal" onClick={this.onClose}>
-            &times;
-          </span>
-          <h1 className="header">Create a project</h1>
+              &times;
+            </span>
+        </div>
           <div className="form-group">
             <label>
-              <div className="form-label">Project Name (required)</div>
+              <div className="form-label" style={{marginTop: '1rem'}}>Project Name (required)</div>
               <input
                 onChange={this.onChange}
                 value={this.state.projectName}
@@ -607,14 +689,15 @@ class Modal extends Component {
                 type="text"
                 placeholder="My Awesome Project"
                 className="form-input"
+                autoComplete="off"
               />
             </label>
           </div>
           <div className="form-label">Add team members (optional)</div>
-          <button className="main-btn add-members" onClick={this.addMember}>
+          <button className="main-btn add-members" style={{margin: 0}} onClick={this.addMember}>
             Add another member
           </button>
-          <div className="members">
+          <div className="members" style={{overflowX: 'hidden'}}>
             {members.map((val, id) => {
               let memberId = `member-${id}`,
                 emailId = `email-${id}`;
@@ -630,6 +713,7 @@ class Modal extends Component {
                       value={members[id].name}
                       className="form-input"
                       onChange={this.onChange}
+                      autoComplete="off"
                     />
                   </label>
                   <label className="form-label split-email" htmlFor={emailId}>
@@ -642,6 +726,7 @@ class Modal extends Component {
                       value={members[id].email}
                       className="form-input"
                       onChange={this.onChange}
+                      autoComplete="off"
                     />
                   </label>
                   <span

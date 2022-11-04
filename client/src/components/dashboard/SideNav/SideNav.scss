@@ -82,11 +82,12 @@
 .bottom {
   margin-top: 4rem;
   color: $white;
-  padding-left: 3.8rem;
+  // padding-left: 3.8rem;
 }
 
 .side-projects-header {
   font-family: $code;
+  text-decoration: underline;
 }
 
 .project-listings {
